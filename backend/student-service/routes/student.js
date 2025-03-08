@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Student = require('../models/Student');
-const verifyToken = require('../middleware/verifyToken');
+const verifyToken = require('../../auth-service/middleware/verifyToken');
 
 router.get('/all', verifyToken, async (req, res) => {
   try {
@@ -14,7 +14,6 @@ router.get('/all', verifyToken, async (req, res) => {
 
 router.post('/add', verifyToken, async (req, res) => {
   const { nom, email, cours } = req.body;
-
   try {
     const student = new Student({ nom, email, cours });
     await student.save();
